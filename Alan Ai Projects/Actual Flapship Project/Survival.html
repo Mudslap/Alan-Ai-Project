@@ -112,13 +112,14 @@
 			
 			#myCanvas{
 				display: block;
-				position: absolute;
+				position: relative;
 				left: 50%;
-				top: 66%;
+				top: 35%;
 				transform: translate(-50%, -50%);
 				width: 600px;
 				height: 600px;
 				border: 3px solid black;
+				margin-bottom: 100px;
 			}
 		</style>
 	</head>
@@ -130,11 +131,12 @@
 			<h1 style="text-align: center; font-weight: bold; ">Directions</h1>
 			<div class="line"></div>
 			<h2 style="text-align: center;">Press the mic button on the bottom right to start</h2>
-			<h2 style="text-align: center;">Say Start to start the game</h2>
-			<h2 style="text-align: center;">Say LEFT, RIGHT, UP, DOWN to control the chicken</h2>
-			<h2 style="text-align: center;">The objective of the game is to have fun and advance in the game</h2>
+			<h2 style="text-align: center;">The game automatically starts so be careful!</h2>
+			<h2 style="text-align: center;">Say LEFT, RIGHT, UP, DOWN to control the chicken and say USE to shoot a bow or use a potion</h2>
+			<h2 style="text-align: center;">Say 1, 2, 3, 4, 5, or 6 to equip loot you collected from chests</h2>
 		</div>
-		<h2 style="text-align: center;">This is an openworld game so have FUN!</h2>
+		<h2 style="text-align: center;">To attack, walk over enemies, and to loot, walk over chests!</h2>
+		<h2 style="text-align: center;">THe objective is to kill asmany enemies as possible! Have Fun!</h2>
 		<img src="img/chickensheet.png" id="sheet" class="hide">
 		<img src="img/image.png" id="sheetf" class="hide">
 		<img src="img/grass.png" id="grass" class="hide">
@@ -170,6 +172,13 @@
 			</div>
 		</div>
 		
+		<div class="alan-btn"></div>
+		
+		<script type="text/javascript"
+ src="https://studio.alan.app/web/lib/alan_lib.min.js"></script>
+<script>
+  
+</script>
 		<script>
 			var canvas = document.getElementById("myCanvas");
 			var ctx = canvas.getContext("2d");
@@ -294,103 +303,180 @@
 			}
 			
 			var direction = 0;
-			var starting = 0;
-			function keyDownHandler(e) {
-				if(e.keyCode == 65) {
-					rightPressed = true;
-					direction = 1;
-				}
-				else if(e.keyCode == 68) {
-					leftPressed = true;
-					direction = 2;
-				}
-				else if(e.keyCode == 87) {
-					upPressed = true;
-					direction = 3;
-				}
-				else if(e.keyCode == 83) {
-					downPressed = true;
-					direction = 4;
-				}
-				else if(e.keyCode == 16) {
-					shiftPressed = true;
-				}
-				else if(e.keyCode == 49){
-					one_selected = true;
-					two_selected = false;
-					three_selected = false;
-					four_selected = false;
-					five_selected = false;
-					six_selected = false;
-				}
-				else if(e.keyCode == 50){
-					one_selected = false;
-					two_selected = true;
-					three_selected = false;
-					four_selected = false;
-					five_selected = false;
-					six_selected = false;
-				}
-				else if(e.keyCode == 51){
-					one_selected = false;
-					two_selected = false;
-					three_selected = true;
-					four_selected = false;
-					five_selected = false;
-					six_selected = false;
-				}
-				else if(e.keyCode == 52){
-					one_selected = false;
-					two_selected = false;
-					three_selected = false;
-					four_selected = true;
-					five_selected = false;
-					six_selected = false;
-				}
-				else if(e.keyCode == 53){
-					one_selected = false;
-					two_selected = false;
-					three_selected = false;
-					four_selected = false;
-					five_selected = true;
-					six_selected = false;
-				}
-				else if(e.keyCode == 54){
-					one_selected = false;
-					two_selected = false;
-					three_selected = false;
-					four_selected = false;
-					five_selected = false;
-					six_selected = true;
-				}
-				
-				else if(e.keyCode == 32){
-					use = true;
-					starting += 1;
-				}
-			}
-
-			function keyUpHandler(e) {
-				if(e.keyCode == 65) {
-					rightPressed = false;
-				}
-				else if(e.keyCode == 68) {
-					leftPressed = false;
-					direction = 0;
-				}
-				else if(e.keyCode == 87) {
-					upPressed = false;
-					direction = 0;
-				}
-				else if(e.keyCode == 83) {
-					downPressed = false;
-					direction = 0;
-				}
-				else if(e.keyCode == 16) {
-					shiftPressed = false;
-					direction = 0;
-				}
-			}
+			var isStarting = false;
+			var alanBtnInstance = alanBtn({
+				key: "dcc78f2ce29e65ac610c79b727334ea62e956eca572e1d8b807a3e2338fdd0dc/stage",
+				onCommand: function (commandData) {
+				  if (commandData.command === "up") {
+					  upPressed = true;
+					  direction = 3;
+					  setTimeout(function (){upPressed = false}, 1000); 
+				  }
+				  if (commandData.command === "down") {
+					  downPressed = true;
+					  direction = 4;
+					  setTimeout(function (){downPressed = false}, 1000); 
+				  }
+				  if (commandData.command === "left") {
+					  rightPressed = true;
+					  direction = 1;
+					  setTimeout(function (){rightPressed = false}, 1000); 
+				  }
+				  if (commandData.command === "right") {
+					  leftPressed = true;
+					  direction = 2;
+					  setTimeout(function (){leftPressed = false}, 1000); 
+				  }
+				  if (commandData.command === "one") {
+					  one_selected = true;
+					  two_selected = false;
+					  three_selected = false;
+					  four_selected = false;
+					  five_selected = false;
+					  six_selected = false;
+				  }
+				  if (commandData.command === "two") {
+					  one_selected = false;
+					  two_selected = true;
+					  three_selected = false;
+					  four_selected = false;
+					  five_selected = false;
+					  six_selected = false;
+				  }
+				  if (commandData.command === "three") {
+					  one_selected = false;
+					  two_selected = false;
+					  three_selected = true;
+					  four_selected = false;
+					  five_selected = false;
+					  six_selected = false;
+				  }
+				  if (commandData.command === "four") {
+					  one_selected = false;
+					  two_selected = false;
+					  three_selected = false;
+					  four_selected = true;
+					  five_selected = false;
+					  six_selected = false;
+				  }
+				  if (commandData.command === "five") {
+					  one_selected = false;
+					  two_selected = false;
+					  three_selected = false;
+					  four_selected = false;
+					  five_selected = true;
+					  six_selected = false;
+				  }
+				  if (commandData.command === "six") {
+					  one_selected = false;
+					  two_selected = false;
+					  three_selected = false;
+					  four_selected = false;
+					  five_selected = false;
+					  six_selected = true;
+				  }
+				  if (commandData.command === "use") {
+					  use = true;
+				  }
+				},
+				rootEl: document.getElementById("alan-btn"),
+		  	});
+			
+//			function keyDownHandler(e) {
+//				if(e.keyCode == 65) {
+//					rightPressed = true;
+//					direction = 1;
+//				}
+//				else if(e.keyCode == 68) {
+//					leftPressed = true;
+//					direction = 2;
+//				}
+//				else if(e.keyCode == 87) {
+//					upPressed = true;
+//					direction = 3;
+//				}
+//				else if(e.keyCode == 83) {
+//					downPressed = true;
+//					direction = 4;
+//				}
+//				else if(e.keyCode == 16) {
+//					shiftPressed = true;
+//				}
+//				else if(e.keyCode == 49){
+//					one_selected = true;
+//					two_selected = false;
+//					three_selected = false;
+//					four_selected = false;
+//					five_selected = false;
+//					six_selected = false;
+//				}
+//				else if(e.keyCode == 50){
+//					one_selected = false;
+//					two_selected = true;
+//					three_selected = false;
+//					four_selected = false;
+//					five_selected = false;
+//					six_selected = false;
+//				}
+//				else if(e.keyCode == 51){
+//					one_selected = false;
+//					two_selected = false;
+//					three_selected = true;
+//					four_selected = false;
+//					five_selected = false;
+//					six_selected = false;
+//				}
+//				else if(e.keyCode == 52){
+//					one_selected = false;
+//					two_selected = false;
+//					three_selected = false;
+//					four_selected = true;
+//					five_selected = false;
+//					six_selected = false;
+//				}
+//				else if(e.keyCode == 53){
+//					one_selected = false;
+//					two_selected = false;
+//					three_selected = false;
+//					four_selected = false;
+//					five_selected = true;
+//					six_selected = false;
+//				}
+//				else if(e.keyCode == 54){
+//					one_selected = false;
+//					two_selected = false;
+//					three_selected = false;
+//					four_selected = false;
+//					five_selected = false;
+//					six_selected = true;
+//				}
+//				
+//				else if(e.keyCode == 32){
+//					use = true;
+//				}
+//			}
+//
+//			function keyUpHandler(e) {
+//				if(e.keyCode == 65) {
+//					rightPressed = false;
+//				}
+//				else if(e.keyCode == 68) {
+//					leftPressed = false;
+//					direction = 0;
+//				}
+//				else if(e.keyCode == 87) {
+//					upPressed = false;
+//					direction = 0;
+//				}
+//				else if(e.keyCode == 83) {
+//					downPressed = false;
+//					direction = 0;
+//				}
+//				else if(e.keyCode == 16) {
+//					shiftPressed = false;
+//					direction = 0;
+//				}
+//			}
 			
 			function drawBackground(){
 				size = 64;
@@ -1599,7 +1685,7 @@
 					drawBackground();
 					drawChest();
 
-					conditions();	
+					conditions();		
 				ctx.restore();
 
 				UI();
@@ -1608,9 +1694,9 @@
 			var lastRender = 0;
 			window.requestAnimationFrame(loop);
 			
-			//event listeners
-			document.addEventListener('keydown', keyDownHandler, false);
-			document.addEventListener('keyup', keyUpHandler, false);
+//			//event listeners
+//			document.addEventListener('keydown', keyDownHandler, false);
+//			document.addEventListener('keyup', keyUpHandler, false);
 			
 		</script>
 	</body>
