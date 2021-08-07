@@ -47,6 +47,7 @@
 				text-align: center;
 				font-size: 40px;
 			}
+			
 			.icon{
 				font-size: 40px;
 				margin-left: 20px;
@@ -165,18 +166,20 @@
 			#section1{
 				position: relative;
 				width: 100%;
-				height: 70vh;
+				height: 100vh;
 			}
-			#video{
-				opacity: 0.6;
+			#text1{
+				position: relative;
+				top: 40%;
+				transform: translate(0, -50%);
+				padding: 0;
+				margin: 0;
 			}
-			#section1-txt{
-				position: absolute;
-				top: 16%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				width: 100%;
-				height: 20vh;
+			#text1 h1{
+				margin: 0;
+			}
+			#text1 h2 {
+				margin: 0;
 			}
 			
 			#section2{
@@ -190,7 +193,16 @@
 				background-color: lightgray;
 				padding: 5px 20px 10px 20px;
 			}
-
+		</style>
+		
+<!--		slideshow-->
+		<style>
+			#slideshow{
+				position: absolute;
+				width: 100%;
+				height: 100vh;
+			}
+		
 		</style>
 	</head>
 	<body>
@@ -205,18 +217,23 @@
 					<summary><a href="Survival.html">Survival Game</a></summary>
 					<p>This game is a fast paced survival style game where you loot chests and try to kill your fox enemies. This game is infinite and your objective is to get the most amount of enemies killed as possible!</p>
 				</details>
-				
 				<h3 class="two"><a href="Home.html">Voice Games</a></h3>
 			</div>
 		</div>
 		
 		<div id="title">
-			<div id="section1">
-				<iframe id="video" width="100%" height="100%" src="https://www.youtube.com/embed/ko1EeH_Gq-4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<div id="slideshow">
+				<div>
+				
+				</div>
 			</div>
-			<div id="section1-txt">
-				<h1 class="large">Voice Games</h1>
-				<h2 class="sub">A Creative and Innovative way to game</h2>
+			
+			<div id="section1">
+				<div id="text1">
+					<h1 class="large">Voice Games</h1>
+					<h2 class="sub">A Creative and Innovative way to game</h2>
+					<h3 style="text-align: center;"><a href="#" class="links">View Tutorial and Much more on youtube</a></h3>
+				</div>
 			</div>
 			
 			<div id="section2">
